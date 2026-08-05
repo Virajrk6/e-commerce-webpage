@@ -1,0 +1,151 @@
+<app-header></app-header>
+<div style="margin-top: 75px;"></div>
+<mat-card-header class="backButton">
+  <a [routerLink]="'/'" class="d-inline-flex text-decoration-none text-primary"><mat-icon>arrow_back </mat-icon> Back to
+    products</a>
+</mat-card-header>
+@if(cart.cartItems().length){
+<div class="row">
+  <div class="my-2 mx-4  col-10 col-sm-10 col-md-10 col-lg-10 col-xl-7 row cartItems  rounded-3 shadow">
+    @for (item of cart.cartItems(); track item.product.id; let i = $index) {
+    <div class="row col-12 mt-2">
+      <div class="col-1 h-75 pl-3 d-flex align-items-center">
+        <h5 class="">{{i+1}}.</h5>
+      </div>
+      <div class="col-11">
+        <mat-card class="mt-1">
+          <div class="row col-12 d-flex justify-content-between">
+            <div class="col-5">
+              <img class="img-fluid w-100" [src]="item.product.thumbnail">
+            </div>
+            <div class="col-7 p-3 d-grid">
+              <mat-card-subtitle>
+                <h5>{{item.product.title}}</h5>
+                <span class="text-primary">{{item.product.brand}}</span>
+              </mat-card-subtitle>
+              <div>
+                @if(item.product.availabilityStatus == "Low Stock"){
+                <span class="text-danger">Last {{item.product.stock}} available</span>
+                }
+                @else {
+                <span class="text-success">{{item.product.availabilityStatus}}</span>
+                }
+                <br>
+                {{item.product.shippingInformation}}
+              </div>
+              <div>
+                <p>
+                  @if(item.product.category !== "groceries"){
+                  <span>{{item.product.returnPolicy}}</span>
+                  }
+                  @if(item.product.category == "furniture"){
+                  <span class=" text-primary "> ({{item.product.warrantyInformation}})</span>
+                  }
+                </p>
+              </div>
+              <mat-card-content>
+                <div class="row">
+                  <p>@if(item.product.discountPercentage >10){
+                    <span
+                      class="bg-danger fw-light rounded-2 p-1 text-white">-{{item.product.discountPercentage}}%</span>
+                    }
+                    <span class=" fw-bold"> {{item.product.price -
+                      (item.product.discountPercentage*item.product.price)/100| currency}}
+                      <span class="fw-normal">M.R.P.: <s> {{item.product.price | currency}}</s></span>
+                      <!-- @if(item.quantity>1){
+                    <mat-icon>close</mat-icon> {{item.quantity}}
+                    } -->
+                    </span>
+                  </p>
+                </div>
+              </mat-card-content>
+              <div>
+                <mat-card-actions class="gap-2">
+                  <button matButton="elevated" class="addButton ">
+                    <div>
+                      <button matButton class="buttonInButton" (click)="cart.deleteFromCart(item.product)">
+                        <mat-icon>delete</mat-icon>
+                      </button>
+                      <button class="buttonInButton" matButton (click)="cart.reduceFromCart(item.product)">
+                        -
+                      </button>
+                      <span class="buttonInButton">
+                        {{ item.quantity }}
+                      </span>
+                      <button class="buttonInButton" matButton (click)="cart.addTOCart(item.product)">
+                        +
+                      </button>
+                    </div>
+                  </button>
+                  <button (click)="goToDetails(item.product.id)" matButton="elevated"> Product Details</button>
+                </mat-card-actions>
+              </div>
+            </div>
+          </div>
+        </mat-card>
+        <br>
+      </div>
+    </div>
+    }
+  </div>
+
+  <!-- Payment division -->
+
+  <div class="my-2 mx-4 col-10 col-sm-10 col-md-10 col-lg-10 col-xl-4 payment">
+    <div class="mb-4">
+      <h4 class="text-center">Order Summary</h4>
+    </div>
+    <div class="p-2">
+      @for (item of cart.cartItems(); track item.product.id) {
+      <div class="row d-flex justify-content-start">
+        <div class="col-10">
+          <div class="row p-1">
+            <span> {{item.product.title}} @if(item.quantity >1){<span>* ({{item.quantity}}) </span> } @else {<span></span>}</span>
+          </div>
+        </div>
+        <div class="col-2 d-flex justify-content-end">
+          {{item.product.price* item.quantity | currency
+          }}
+        </div>
+      </div>
+      }
+      <hr>
+      <div class="row d-flex justify-content-between">
+        <div class="col-10">
+          <span>Tax</span>
+        </div>
+        <div class="col-2 d-flex justify-content-end">
+          -
+        </div>
+      </div>
+      <div class="row d-flex justify-content-between">
+        <div class="col-10">
+          <span>Discount</span>
+        </div>
+        <div class="col-2 d-flex justify-content-end">
+          {{discount() | currency}}
+        </div>
+      </div>
+      <hr>
+      <div class="row d-flex justify-content-between">
+        <div class="col-10">
+          <span>Subtotal</span>
+        </div>
+        <div class="col-2 d-flex justify-content-end">
+          {{subTotal() | currency}}
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</div>
+
+}
+@else {
+<div class="empty-state">
+  <mat-icon style="font-size: 4rem; width: 4rem; height: 4rem;">inventory</mat-icon>
+  <h2>Cart is empty</h2>
+  <h5>Add items into the cart!</h5>
+</div>
+}

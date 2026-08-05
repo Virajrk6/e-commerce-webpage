@@ -1,0 +1,170 @@
+<!-- <mat-card class="h-100 card">
+    <div>
+        <mat-card-header>
+            <mat-card-title><a class="text-decoration-none text-black"
+                    [routerLink]="'details/'+productsDetails().id">{{productsDetails().title}}</a></mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <div class="rating">
+                <span>{{ productsDetails().rating }}</span>
+                @for (star of [1,2,3,4,5]; track star) {
+                <mat-icon>{{ ratings.getStarType(star, productsDetails().rating) }}</mat-icon>
+                }
+                <span>({{productsDetails().reviews.length}})</span>
+            </div>
+        </mat-card-content>
+    </div>
+    <div class="saleSpace">
+        @if(productsDetails().discountPercentage > 10){
+        <p class=" m-2 h-100">
+            <span class="sale-badge">
+                On sale
+            </span>
+            <span class="text-success fw-semibold"> {{productsDetails().discountPercentage}}% off
+            </span>
+        </p>
+        }
+        @else{
+        <p class=" m-3"></p>
+        }
+    </div>
+    <span class="h-100"></span>
+    <div class="image">
+        <a [routerLink]="'details/'+productsDetails().id"><img class="w-100 h-100"
+                [src]="productsDetails().thumbnail"></a>
+    </div>
+
+    <div class="price">
+        @if(productsDetails().discountPercentage > 10){
+        <mat-card-content>
+            <div class="row">
+                <p><s>{{productsDetails().price | currency}}</s><span class="text-success fw-semibold">
+                        {{productsDetails().price - (productsDetails().discountPercentage*productsDetails().price)/100|
+                        currency}} </span></p>
+            </div>
+        </mat-card-content>
+
+        } @else {
+        <mat-card-content class="">
+            <div class="row">
+                <p>{{productsDetails().price - (productsDetails().discountPercentage*productsDetails().price)/100 |
+                    currency}}</p>
+            </div>
+        </mat-card-content>
+        }
+    </div>
+
+    <div class="buttons">
+        <mat-card-actions class="m-3">
+            <div class="d-flex gap-2">
+                @if(itemQuantity() !== 0){
+                <button matButton="elevated" class="addButton">
+                    <div>
+                        <button matButton class="buttonInButton" (click)="cartItem.deleteFromCart(productsDetails())">
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                        <button class="buttonInButton" matButton (click)="cartItem.reduceFromCart(productsDetails())">
+                            -
+                        </button>
+                        <span class="buttonInButton">
+                            {{ itemQuantity() }}
+                        </span>
+                        <button class="buttonInButton" matButton (click)="cartItem.addTOCart(productsDetails())">
+                            +
+                        </button>
+                    </div>
+                </button>
+                } @else{
+                <button matButton="tonal" (click)="cartItem.addTOCart(productsDetails())">{{addbutton()}}</button>
+                }
+                <button matButton="tonal" [routerLink]="'details/'+productsDetails().id">View Details</button>
+            </div>
+
+        </mat-card-actions>
+    </div>
+</mat-card> -->
+<mat-card class="card">
+
+    <!-- Sale badge -->
+
+    @if(productsDetails().discountPercentage > 10){
+    <div class="sale-badge">
+        {{ productsDetails().discountPercentage }}% OFF
+    </div>
+    }
+
+    <!-- Favourite button -->
+
+    <button mat-icon-button class="wishlist-btn">
+        <mat-icon>favorite_border</mat-icon>
+    </button>
+
+    <!-- Product image -->
+
+    <div class="image">
+        <a [routerLink]="'details/' + productsDetails().id">
+            <img [src]="productsDetails().thumbnail">
+        </a>
+    </div>
+
+    <!-- Product title -->
+
+    <div class="title">
+        <a class="text-decoration-none text-black" [routerLink]="'details/' + productsDetails().id">
+            {{ productsDetails().title }} </a>
+    </div>
+
+    <!-- Rating -->
+
+    <div class="rating">
+        <span>{{ productsDetails().rating }}</span>
+        @for (star of [1,2,3,4,5]; track star) {
+            <mat-icon>
+                {{ ratings.getStarType(star, productsDetails().rating) }}
+            </mat-icon>
+        }
+        <span>({{ productsDetails().reviews.length }})</span>
+    </div>
+
+    <!-- Price -->
+
+    <div class="price">
+        @if(productsDetails().discountPercentage > 10){
+        <div class="old-price">
+            <s>{{ productsDetails().price | currency }}</s>
+        </div>
+        }
+        <div class="new-price">
+            {{productsDetails().price -(productsDetails().discountPercentage *productsDetails().price) / 100| currency }}
+        </div>
+    </div>
+
+    <!-- Buttons -->
+
+    <div class="buttons">
+        <div class="d-flex gap-2">
+                @if(itemQuantity() !== 0){
+                <button matButton="elevated" class="addButton">
+                    <div>
+                        <button matButton class="buttonInButton" (click)="cartItem.deleteFromCart(productsDetails())">
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                        <button class="buttonInButton" matButton (click)="cartItem.reduceFromCart(productsDetails())">
+                            -
+                        </button>
+                        <span class="buttonInButton">
+                            {{ itemQuantity() }}
+                        </span>
+                        <button class="buttonInButton" matButton (click)="cartItem.addTOCart(productsDetails())">
+                            +
+                        </button>
+                    </div>
+                </button>
+                } @else{
+                <button matButton="tonal" (click)="cartItem.addTOCart(productsDetails())">{{addbutton()}}</button>
+                }
+                <button matButton="tonal" [routerLink]="'details/'+productsDetails().id">View Details</button>
+            </div>
+    </div>
+
+</mat-card>

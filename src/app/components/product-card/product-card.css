@@ -1,0 +1,261 @@
+/* .addButton {
+    max-width: 300px;
+    min-width: 170px;
+}
+
+.buttonInButton {
+    max-width: 40px;
+    min-width: 20px;
+}
+.card{
+    display: grid;
+    grid-template-rows: auto auto 1fr auto auto; 
+}
+
+.image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 300px;
+    height: 300px;
+}
+
+.price {
+    height: 40px;
+}
+.rating {
+  display: flex;
+  align-items: center;
+  gap: 1px;
+}
+
+.rating mat-icon {
+  color: #eab822;
+  font-size: 24px;
+  width: 24px;
+  height: 24px;
+} */
+
+
+
+/* 
+New style
+.card {
+    display: grid;
+    grid-template-rows: auto auto 1fr auto auto;
+    border-radius: 18px;
+    overflow: hidden;
+    padding: 12px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    background-color: white;
+}
+
+.card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+}
+
+
+.image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 250px;
+    padding: 20px;
+    overflow: hidden;
+}
+
+.image img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+}
+
+.card:hover .image img {
+    transform: scale(1.08);
+}
+
+mat-card-title {
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 1.4;
+}
+
+mat-card-title a {
+    color: #222;
+}
+
+mat-card-title a:hover {
+    color: #1976d2;
+}
+
+.rating {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    margin-top: 8px;
+}
+
+.rating span {
+    font-size: 14px;
+    color: #666;
+}
+
+.rating mat-icon {
+    color: #ffc107;
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+}
+
+.sale-badge {
+    display: inline-block;
+    padding: 6px 14px;
+    border-radius: 20px;
+    background: #1976d2;
+    color: white;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.buttons {
+    margin-top: 10px;
+}
+
+.addButton {
+    min-width: 170px;
+    border-radius: 10px;
+}
+
+.buttonInButton {
+    min-width: 30px;
+} */
+
+
+.card {
+    position: relative;
+    padding: 18px;
+    border-radius: 18px;
+    overflow: hidden;
+    background: white;
+    transition: 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+}
+
+/* image */
+
+.image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    overflow: hidden;
+}
+
+.image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transition: 0.3s ease;
+}
+
+.card:hover img {
+    transform: scale(1.08);
+}
+
+/* badge */
+
+.sale-badge {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    padding: 6px 12px;
+    border-radius: 20px;
+    background: #1976d2;
+    color: white;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+/* favourite button */
+
+.wishlist-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: white;
+    border-radius: 50%;
+}
+
+/* title */
+
+.title {
+    min-height: 50px;
+}
+
+.title a {
+    font-size: 17px;
+    font-weight: 600;
+    line-height: 1.4;
+}
+
+/* rating */
+
+.rating {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+}
+
+.rating mat-icon {
+    color: #ffc107;
+    width: 18px;
+    height: 18px;
+    font-size: 18px;
+}
+
+/* price */
+
+.price {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.old-price {
+    color: gray;
+}
+
+.new-price {
+    color: #1b8d44;
+    font-size: 22px;
+    font-weight: 700;
+}
+
+/* buttons */
+
+.buttons {
+    margin-top: auto;
+    display: flex;
+    gap: 10px;
+}
+
+.addButton {
+    min-width: 170px;
+}
+
+.buttonInButton {
+    min-width: 30px;
+}

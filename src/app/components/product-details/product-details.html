@@ -1,0 +1,128 @@
+<app-header></app-header>
+<div style="padding-top: 60px;"></div>
+<mat-card-header class="backButton">
+    <a matButton routerLink="" routerLinkActive="true"><mat-icon>arrow_back</mat-icon> Back to products</a>
+</mat-card-header>
+<div class="row col-12">
+    <div class="thumbnail-container">
+
+        <div class="image-list" #imageContainer>
+            @for (img of products().images; track img) {
+            <img [src]="img" class="thumbnail" alt="Product Image">
+            }
+        </div>
+        <div class="row mt-2">
+            <button class="col-6" [disabled]="ScrollLeftButton()" matButton (click)="scrollLeft()">
+                <mat-icon>keyboard_arrow_left</mat-icon>
+            </button>
+            <button class="col-6" [disabled]="ScrollRightButton()" matButton (click)="scrollRight()">
+                <mat-icon>keyboard_arrow_right</mat-icon>
+            </button>
+        </div>
+
+    </div>
+    <div class="col-6">
+        <mat-card class="col-12 m-2 p-2">
+            <mat-card-header>
+                <mat-card-title>{{products().title}}</mat-card-title>
+                <mat-card-subtitle class="text-primary">{{products().brand}}</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+                <div class="rating my-2">
+                    <span>{{ products().rating }}</span>
+                    @for (star of [1,2,3,4,5]; track star) {
+                    <mat-icon>{{ ratings.getStarType(star, products().rating) }}</mat-icon>
+                    }
+                    <span>({{products().reviews.length}})</span>
+                </div>
+            </mat-card-content>
+            @if(products().discountPercentage > 10){
+            <p class=" m-2 h-100"><span class="bg-primary rounded-4 p-2"
+                    style="width: auto; font-weight: 500; color: antiquewhite;">
+                    On sale</span> <span class="text-success fw-semibold"> {{products().discountPercentage}}% off
+                </span>
+            </p>
+            }
+            <mat-card-content>
+                <p>{{products().description}}</p>
+
+                <div>
+                    @if(products().category !== "groceries"){
+                    <span class="text-primary">Dimentions: </span> <span class="p-1 d-inline-flex">
+                        {{dimentions()?.height}}(cm) <mat-icon>clear</mat-icon> {{dimentions()?.width}}(cm)
+                        <mat-icon>clear</mat-icon> {{dimentions()?.depth}}(cm)</span>
+                    }
+                </div>
+                @if(products().category == "furniture"){
+                <div class="col-4">
+                    <span class="fw-semibold">{{products().warrantyInformation}}</span>
+                </div>
+                }
+                <div class="col-4">
+                    <span>{{products().returnPolicy}}</span>
+                </div>
+                <div class="row d-inline-flex justify-content-start">
+                    @if(products().price == discountedPrice()){
+                    <div class="col">
+                        <p>{{products().price | currency}}</p>
+                    </div>
+                    }@else{
+                    <div class="col">
+                        <p><s>{{products().price | currency}}</s></p>
+                    </div>
+                    <div class="col">
+                        <p class="text-success fw-semibold">
+                            {{discountedPrice() | currency}}
+                        </p>
+                    </div>
+                    }
+                </div>
+            </mat-card-content>
+            <mat-card-actions>
+                @if(itemQuantity() !== 0){
+                <button matButton="elevated">
+                    <div>
+                        <button matButton class="buttonInButton" (click)="cartItem.deleteFromCart(products())">
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                        <button matButton (click)="cartItem.reduceFromCart(products())">
+                            -
+                        </button>
+                        <span>
+                            {{itemQuantity()}}
+                        </span>
+                        <button matButton (click)="cartItem.addTOCart(products())">
+                            +
+                        </button>
+                    </div>
+                </button>
+                } @else{
+                <button matButton="tonal" (click)="cartItem.addTOCart(products())">Add to Cart</button>
+                }
+            </mat-card-actions>
+        </mat-card>
+    </div>
+</div>
+<div class="col-11">
+    <mat-card-title class="mb-4">
+        <span class="text-secondary ">Reviews</span>
+    </mat-card-title>
+    @for (item of reviews(); track $index) {
+    <mat-card class="reviews mb-3 mx-3">
+        <mat-card-header>
+            <mat-card-subtitle>
+                {{item.reviewerName}}
+            </mat-card-subtitle>
+            ({{item.date | date}})
+        </mat-card-header>
+        <mat-card-content>
+            <div class="ratingReview">
+            @for (star of [1,2,3,4,5]; track star) {
+            <mat-icon>{{ ratings.getStarType(star, item.rating) }}</mat-icon>
+            }
+            </div>
+            {{item.comment}}
+        </mat-card-content>
+    </mat-card>
+    }
+</div>

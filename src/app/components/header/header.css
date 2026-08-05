@@ -1,0 +1,14 @@
+.spacer {
+    flex: 1 1 auto;
+}
+
+mat-toolbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 999;
+}
+.cartIcon{
+    width: 100px;
+}

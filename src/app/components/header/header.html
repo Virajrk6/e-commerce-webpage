@@ -1,0 +1,15 @@
+<mat-toolbar class=" py-3 px-5 mb-2 shadow">
+  <div>
+    <button mat-button (click)="redirectHome()">
+      <mat-icon aria-hidden="false" aria-label="Store" fontIcon="store"></mat-icon>
+    </button>
+    <span>Modern Angular</span>
+  </div>
+  <span class="spacer"></span>
+  <button matButton>Product</button>
+  <div class="cartIcon">
+    <button matButton (click)="cartRoute()">
+    <mat-icon [matBadge]="cartService.totalItems()" [matBadgeHidden]="cartService.totalItems()==0" fontIcon="shopping_cart"></mat-icon>
+    </button>
+  </div>
+</mat-toolbar>

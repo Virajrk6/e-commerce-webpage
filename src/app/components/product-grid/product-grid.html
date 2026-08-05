@@ -1,0 +1,38 @@
+<!-- <form class="container"> -->
+<app-header />
+<div class="background">
+    <div class="container page-container">
+    <div class="toolbar">
+        <mat-form-field appearance="outline" class="searchBox">
+            <mat-label>Search product</mat-label>
+            <input matInput placeholder="Search products" [(ngModel)]="searchItem" >
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Category</mat-label>
+            <mat-select id="catagory" (valueChange)="changedCatagory($event)" >
+                <mat-option value="all"> All Products </mat-option>
+                <mat-option value="beauty"> Beauty Products </mat-option>
+                <mat-option value="fragrances"> Perfumes </mat-option>
+                <mat-option value="furniture"> Furniture </mat-option>
+                <mat-option value="groceries"> Groceries </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+</div>
+    <!-- </form> -->
+    <div class="container">
+        <div class="container mt-4 gridcard">
+            @for (product of filteredProduct(); track product.id) {
+            <app-product-card [productsDetails]="product" />
+            } @empty {
+            <div class="empty-state">
+                <mat-icon style="font-size: 4rem; width: 4rem; height: 4rem;">inventory</mat-icon>
+                <h2>Searched item not found</h2>
+                <h5>Try searching different products!</h5>
+            </div>
+            }
+        </div>
+    </div>
+</div>
+
+<router-outlet />
