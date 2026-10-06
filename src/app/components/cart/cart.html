@@ -5,134 +5,139 @@
     products</a>
 </mat-card-header>
 @if(cart.cartItems().length){
-<div class="row">
-  <div class="my-2 mx-4  col-10 col-sm-10 col-md-10 col-lg-10 col-xl-7 row cartItems  rounded-3 shadow">
-    @for (item of cart.cartItems(); track item.product.id; let i = $index) {
-    <div class="row col-12 mt-2">
-      <div class="col-1 h-75 pl-3 d-flex align-items-center">
-        <h5 class="">{{i+1}}.</h5>
-      </div>
-      <div class="col-11">
-        <mat-card class="mt-1">
-          <div class="row col-12 d-flex justify-content-between">
-            <div class="col-5">
-              <img class="img-fluid w-100" [src]="item.product.thumbnail">
-            </div>
-            <div class="col-7 p-3 d-grid">
-              <mat-card-subtitle>
-                <h5>{{item.product.title}}</h5>
-                <span class="text-primary">{{item.product.brand}}</span>
-              </mat-card-subtitle>
-              <div>
-                @if(item.product.availabilityStatus == "Low Stock"){
-                <span class="text-danger">Last {{item.product.stock}} available</span>
-                }
-                @else {
-                <span class="text-success">{{item.product.availabilityStatus}}</span>
-                }
-                <br>
-                {{item.product.shippingInformation}}
+<div class="row w-100">
+  <div class="col-12 col-lg-8">
+    <div class="py-2 px-4 cartItems">
+      @for (item of cart.cartItems(); track item.product.id; let i = $index) {
+      <div class="d-flex col-12 mt-2">
+        <div class="col-1 h-75 pe-3 d-flex align-items-center">
+          <h5 class="">{{i+1}}.</h5>
+        </div>
+        <div class="col-11">
+          <mat-card class="mt-1">
+            <div class="row col-12 d-flex justify-content-between">
+              <div class="col-4 col-sm-4 col-md-5 col-xl-5">
+                <img class="img-fluid" [src]="item.product.thumbnail">
               </div>
-              <div>
-                <p>
-                  @if(item.product.category !== "groceries"){
-                  <span>{{item.product.returnPolicy}}</span>
+              <div class="col-8 col-sm-8 col-md-7 col-xl-7 p-3 ">
+                <mat-card-subtitle>
+                  <h5>{{item.product.title}}</h5>
+                  <span class="text-primary">{{item.product.brand}}</span>
+                </mat-card-subtitle>
+                <div>
+                  @if(item.product.availabilityStatus == "Low Stock"){
+                  <span class="text-danger">Last {{item.product.stock}} available</span>
                   }
-                  @if(item.product.category == "furniture"){
-                  <span class=" text-primary "> ({{item.product.warrantyInformation}})</span>
+                  @else {
+                  <span class="text-success">{{item.product.availabilityStatus}}</span>
                   }
-                </p>
-              </div>
-              <mat-card-content>
-                <div class="row">
-                  <p>@if(item.product.discountPercentage >10){
-                    <span
-                      class="bg-danger fw-light rounded-2 p-1 text-white">-{{item.product.discountPercentage}}%</span>
+                  <br>
+                  {{item.product.shippingInformation}}
+                </div>
+                <div>
+                  <p>
+                    @if(item.product.category !== "groceries"){
+                    <span>{{item.product.returnPolicy}}</span>
                     }
-                    <span class=" fw-bold"> {{item.product.price -
-                      (item.product.discountPercentage*item.product.price)/100| currency}}
-                      <span class="fw-normal">M.R.P.: <s> {{item.product.price | currency}}</s></span>
-                      <!-- @if(item.quantity>1){
-                    <mat-icon>close</mat-icon> {{item.quantity}}
-                    } -->
-                    </span>
+                    @if(item.product.category == "furniture"){
+                    <span class=" text-primary "> ({{item.product.warrantyInformation}})</span>
+                    }
                   </p>
                 </div>
-              </mat-card-content>
-              <div>
-                <mat-card-actions class="gap-2">
-                  <button matButton="elevated" class="addButton ">
-                    <div>
-                      <button matButton class="buttonInButton" (click)="cart.deleteFromCart(item.product)">
-                        <mat-icon>delete</mat-icon>
-                      </button>
-                      <button class="buttonInButton" matButton (click)="cart.reduceFromCart(item.product)">
-                        -
-                      </button>
-                      <span class="buttonInButton">
-                        {{ item.quantity }}
+                <mat-card-content>
+                  <div class="row">
+                    <p>@if(item.product.discountPercentage >10){
+                      <span
+                        class="bg-danger fw-light rounded-2 p-1 text-white">-{{item.product.discountPercentage}}%</span>
+                      }
+                      <span class=" fw-bold"> {{item.product.price -
+                        (item.product.discountPercentage*item.product.price)/100| currency}}
+                        <span class="fw-normal">M.R.P.: <s> {{item.product.price | currency}}</s></span>
+                        <!-- @if(item.quantity>1){
+                    <mat-icon>close</mat-icon> {{item.quantity}}
+                    } -->
                       </span>
-                      <button class="buttonInButton" matButton (click)="cart.addTOCart(item.product)">
-                        +
-                      </button>
-                    </div>
-                  </button>
-                  <button (click)="goToDetails(item.product.id)" matButton="elevated"> Product Details</button>
-                </mat-card-actions>
+                    </p>
+                  </div>
+                </mat-card-content>
+                <div>
+                  <mat-card-actions class="gap-2">
+                    <button matButton="elevated" class="addButton ">
+                      <div>
+                        <button matButton class="buttonInButton" (click)="cart.deleteFromCart(item.product)">
+                          <mat-icon>delete</mat-icon>
+                        </button>
+                        <button class="buttonInButton" matButton (click)="cart.reduceFromCart(item.product)">
+                          -
+                        </button>
+                        <span class="buttonInButton">
+                          {{ item.quantity }}
+                        </span>
+                        <button class="buttonInButton" matButton (click)="cart.addTOCart(item.product)">
+                          +
+                        </button>
+                      </div>
+                    </button>
+                    <button (click)="goToDetails(item.product.id)" matButton="elevated"> Product Details</button>
+                  </mat-card-actions>
+                </div>
               </div>
             </div>
-          </div>
-        </mat-card>
-        <br>
-      </div>
-    </div>
-    }
-  </div>
-
-  <!-- Payment division -->
-
-  <div class="my-2 mx-4 col-10 col-sm-10 col-md-10 col-lg-10 col-xl-4 payment">
-    <div class="mb-4">
-      <h4 class="text-center">Order Summary</h4>
-    </div>
-    <div class="p-2">
-      @for (item of cart.cartItems(); track item.product.id) {
-      <div class="row d-flex justify-content-start">
-        <div class="col-10">
-          <div class="row p-1">
-            <span> {{item.product.title}} @if(item.quantity >1){<span>* ({{item.quantity}}) </span> } @else {<span></span>}</span>
-          </div>
-        </div>
-        <div class="col-2 d-flex justify-content-end">
-          {{item.product.price* item.quantity | currency
-          }}
+          </mat-card>
+          <br>
         </div>
       </div>
       }
-      <hr>
-      <div class="row d-flex justify-content-between">
-        <div class="col-10">
-          <span>Tax</span>
-        </div>
-        <div class="col-2 d-flex justify-content-end">
-          -
-        </div>
+    </div>
+  </div>
+  <!-- Payment division -->
+
+  <div class="col-12 col-lg-4">
+    <div class="p-2  payment">
+      <div class="mb-4">
+        <h4 class="text-center">Order Summary</h4>
       </div>
-      <div class="row d-flex justify-content-between">
-        <div class="col-10">
-          <span>Discount</span>
+      <div class="p-2">
+        @for (item of cart.cartItems(); track item.product.id) {
+        <div class="d-flex justify-content-start">
+          <div class="col-10">
+            <div class="row p-1">
+              <span class="fw-semibold"> {{item.product.title}} @if(item.quantity >1){<span>* ({{item.quantity}})
+                </span>
+                } @else {<span></span>}</span>
+            </div>
+          </div>
+          <div class="col-2 d-flex justify-content-end">
+            {{item.product.price* item.quantity | currency
+            }}
+          </div>
         </div>
-        <div class="col-2 d-flex justify-content-end">
-          {{discount() | currency}}
+        }
+        <hr>
+        <div class="row d-flex justify-content-between">
+          <div class="col-10">
+            <span>Tax</span>
+          </div>
+          <div class="col-2 d-flex justify-content-end">
+            -
+          </div>
         </div>
-      </div>
-      <hr>
-      <div class="row d-flex justify-content-between">
-        <div class="col-10">
-          <span>Subtotal</span>
+        <div class="row d-flex justify-content-between">
+          <div class="col-10">
+            <span>Discount</span>
+          </div>
+          <div class="col-2 d-flex justify-content-end">
+            {{discount() | currency}}
+          </div>
         </div>
-        <div class="col-2 d-flex justify-content-end">
-          {{subTotal() | currency}}
+        <hr>
+        <div class="row d-flex justify-content-between">
+          <div class="col-10">
+            <span class="fw-semibold">Subtotal</span>
+          </div>
+          <div class="col-2 d-flex justify-content-end">
+            <span class="fw-semibold"> {{subTotal() | currency}} </span>
+          </div>
         </div>
       </div>
     </div>

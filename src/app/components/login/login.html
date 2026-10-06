@@ -1,0 +1,112 @@
+<div class="vh-100 loginPage">
+    @if(!createAccount()){
+    <div class="d-flex vh-100 align-items-center justify-content-center mx-4">
+        <mat-card class="loginCard">
+            <mat-card-header class="d-flex justify-content-center">
+                <div class="d-flex flex-column">
+                    <div class="d-flex p-3 align-items-center justify-content-center">
+                        <h3>Login</h3>
+                    </div>
+                    <!-- <div class="d-flex align-items-center justify-content-center p-2">
+                        <mat-button-toggle-group [value]="`user`">
+                            <mat-button-toggle value="user">User</mat-button-toggle>
+                            <mat-button-toggle value="admin">Admin</mat-button-toggle>
+                        </mat-button-toggle-group>
+                    </div> -->
+                </div>
+            </mat-card-header>
+
+            <mat-card-content>
+                <form [formGroup]="loginForm" (ngSubmit)="login()">
+                    <div class="d-flex flex-column align-items-center justify-content-center IDBox">
+                        <div class="d-flex flex-column">
+                            <div class="d-flex">
+                                <div class="d-flex flex-column">
+                                    <label class="h6">Username: </label>
+                                    <mat-form-field appearance="outline">
+                                        <input placeholder="email@example.com" matInput formControlName="email"
+                                            type="email">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="d-flex">
+                                <div class="d-flex flex-column">
+                                    <label class="h6">Password: </label>
+                                    <mat-form-field appearance="outline">
+                                        <input matInput formControlName="password" type="password">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-center justify-content-between mb-3">
+                                <button matButton="filled" type="submit"> Login</button>
+                            </div>
+                        </div>
+                        <div class="d-flex gap-2 align-items-center">
+                            <div>
+                                <span class="w-100">New user?</span>
+                            </div>
+                            <div>
+                                <button matButton="tonal" (click)="createAccount.set(true)">Sign up</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </mat-card-content>
+        </mat-card>
+    </div>
+}
+    @if(createAccount()){
+        <div class="d-flex vh-100 align-items-center justify-content-center mx-4">
+        <mat-card class="loginCard">
+            <mat-card-header class="d-flex justify-content-center">
+                <div class="d-flex flex-column">
+                    <div class="d-flex p-3 align-items-center justify-content-center">
+                        <h3>Create Account</h3>
+                    </div>
+                </div>
+            </mat-card-header>
+
+            <mat-card-content>
+                <form [formGroup]="createAccountForm" (ngSubmit)="signUp()">
+                    <div class="d-flex flex-column align-items-center justify-content-center IDBox">
+                        <div class="d-flex flex-column">
+                            <div class="d-flex gap-2">
+                                <div class="d-flex flex-column">
+                                    <label class="h6">Full Name: </label>
+                                    <mat-form-field appearance="outline">
+                                        <input matInput formControlName="fullName"
+                                            type="text">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="d-flex">
+                                <div class="d-flex flex-column otherFields">
+                                    <label class="h6">Email: </label>
+                                    <mat-form-field appearance="outline">
+                                        <input matInput formControlName="email"
+                                            type="email">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="d-flex">
+                                <div class="d-flex flex-column">
+                                    <label class="h6">Password: </label>
+                                    <mat-form-field appearance="outline">
+                                        <input matInput formControlName="password"
+                                            type="text">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-center justify-content-between mb-3">
+                                <button matButton="filled" type="submit"> Sign up</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </form>
+            </mat-card-content>
+        </mat-card>
+    </div>
+    }
+
+</div>

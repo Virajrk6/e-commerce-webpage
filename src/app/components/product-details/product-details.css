@@ -44,3 +44,15 @@
   width: 20px;
   height: 20px;
 }
+.buttonInButton {
+    min-width: 50px;
+}
+.mat-mdc-button:has(.material-icons, mat-icon, [matButtonIcon]){
+    padding: 10px;
+}
+.mat-mdc-button > .mat-icon {
+    margin: 0%;
+}
+.mat-mdc-raised-button {
+    padding: 15px;
+}

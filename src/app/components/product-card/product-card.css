@@ -253,9 +253,20 @@ mat-card-title a:hover {
 }
 
 .addButton {
-    min-width: 170px;
+    /* max-width: 200px; */
+    min-width: 150px;
 }
 
 .buttonInButton {
     min-width: 30px;
+}
+
+.mat-mdc-button:has(.material-icons, mat-icon, [matButtonIcon]){
+    padding: 10px;
+}
+.mat-mdc-button > .mat-icon {
+    margin: 0%;
+}
+.mat-mdc-raised-button {
+    padding: 5px;
 }

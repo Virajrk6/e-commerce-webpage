@@ -146,7 +146,7 @@
                 @if(itemQuantity() !== 0){
                 <button matButton="elevated" class="addButton">
                     <div>
-                        <button matButton class="buttonInButton" (click)="cartItem.deleteFromCart(productsDetails())">
+                        <button matButton="" class="buttonInButton" (click)="cartItem.deleteFromCart(productsDetails())">
                             <mat-icon>delete</mat-icon>
                         </button>
                         <button class="buttonInButton" matButton (click)="cartItem.reduceFromCart(productsDetails())">

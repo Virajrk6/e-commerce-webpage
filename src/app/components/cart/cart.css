@@ -1,14 +1,12 @@
+
+
 .cartItems {
     background-color: aliceblue;
     box-shadow: inset;
-
+    border-radius: 12px;
 }
 
 .payment {
-    grid-column: 1/-1;
-    display: flex;
-    flex-direction: column;
-    /* text-align: center; */
     background-color: rgb(249, 238, 224);
     min-height: 100px;
     max-height: fit-content;
@@ -16,13 +14,11 @@
     padding-bottom: 20px;
     border-radius: 10px;
     /* position: fixed; */
-    top: 20%;
-    left: 62%;
 }
 
 .addButton {
     max-width: 500px;
-    min-width: 200px;
+    min-width: 150px;
 }
 
 .buttonInButton {
@@ -36,6 +32,18 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 4px;
+    padding: 80px;
     text-align: center;
+}
+.buttonInButton {
+    min-width: 30px;
+}
+.mat-mdc-button:has(.material-icons, mat-icon, [matButtonIcon]){
+    padding: 10px;
+}
+.mat-mdc-button > .mat-icon {
+    margin: 0%;
+}
+.mat-mdc-raised-button {
+    padding: 15px;
 }

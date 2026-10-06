@@ -1,19 +1,15 @@
-import { Component, computed, signal, OnInit, inject } from '@angular/core';
+import { Component, computed, signal, inject } from '@angular/core';
 import { ProductCard } from '../product-card/product-card';
 import { MatIcon } from '@angular/material/icon';
 import { MatFormField, MatLabel } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { Api } from '../../services/api';
-import { ProductResponse, Products } from '../../services/products';
-import { FormsModule, NgModel } from '@angular/forms';
-import { CommonModule } from '@angular/common';
+import { Products } from '../../services/products';
+import { FormsModule } from '@angular/forms';
 import { CartService } from '../../services/cart/cart-service';
 import { RouterOutlet } from '@angular/router';
 import { Header } from '../header/header';
-import { MatMenu, MatMenuTrigger, MatMenuItem } from '@angular/material/menu';
-import { MatAnchor } from "@angular/material/button";
 import { MatOption, MatSelect } from '@angular/material/select';
-import { ProductDetails } from '../product-details/product-details';
 
 @Component({
   selector: 'app-product-grid',
